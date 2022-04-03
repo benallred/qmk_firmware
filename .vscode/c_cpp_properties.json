@@ -1,0 +1,20 @@
+{
+    "configurations": [
+        {
+            "name": "Win32",
+            "includePath": [
+                "${workspaceFolder}/**",
+                "${workspaceFolder}/quantum/**",
+                "${workspaceFolder}/platforms",
+                "${workspaceFolder}/lib/arm_atsam/packs/atmel/SAMD51_DFP/1.0.70/include/pio",
+                "C:/QMK_MSYS/mingw64/arm-none-eabi/include/**"
+            ],
+            "defines": ["QMK_KEYBOARD_H=<quantum.h>"],
+            "cStandard": "c17",
+            "cppStandard": "c++17",
+            "intelliSenseMode": "windows-gcc-x64",
+            "compilerPath": "C:\\QMK_MSYS\\mingw64\\bin\\avr-gcc.exe"
+        }
+    ],
+    "version": 4
+}

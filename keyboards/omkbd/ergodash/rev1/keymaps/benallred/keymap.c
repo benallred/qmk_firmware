@@ -85,16 +85,14 @@ enum tap_dance_codes {
   DANCE_F12,
 };
 
-#define EISU LALT(KC_GRV)
-
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [LAYER_BASE] = LAYOUT( // Base
-    KC_ESCAPE          , TD(DANCE_NUMROW_1), TD(DANCE_NUMROW_2), TD(DANCE_NUMROW_3), TD(DANCE_NUMROW_4), TD(DANCE_NUMROW_5), TG(11)             ,                    TT(2)               , TD(DANCE_NUMROW_6), TD(DANCE_NUMROW_7), TD(DANCE_NUMROW_8), TD(DANCE_NUMROW_9), TD(DANCE_NUMROW_0), KC_ENTER      ,
-    KC_TRANSPARENT     , C_S_T(KC_Q)       , KC_W              , LT(3, KC_F)       , KC_P              , KC_B              , TG(1)              ,                    TG(4)               , KC_J              , KC_L              , LT(3, KC_U)       , KC_Y              , C_S_T(KC_SCOLON)  , KC_BSLASH     ,
-    TD(DANCE_XCV)      , LGUI_T(KC_A)      , LALT_T(KC_R)      , LCTL_T(KC_S)      , LSFT_T(KC_T)      , KC_G              , LCTL(LGUI(KC_LEFT)),                    LCTL(LGUI(KC_RIGHT)), KC_M              , RSFT_T(KC_N)      , RCTL_T(KC_E)      , RALT_T(KC_I)      , RGUI_T(KC_O)      , KC_QUOTE      ,
-    LSFT_T(KC_CAPSLOCK), KC_Z              , KC_X              , KC_C              , KC_D              , KC_V              , KC_SPACE           ,                    TG(9)               , KC_K              , KC_H              , KC_COMMA          , KC_DOT            , KC_SLASH          , KC_GRAVE      ,
-    LCTL(KC_S)         , LCTL(KC_A)        , LCTL(KC_Z)        , MO(8)             , KC_ENTER          , MO(4)             , KC_TAB             ,                    KC_DEL              , LT(7, KC_SPACE)   , KC_BSPACE         , MO(8)             , MO(10)            , TT(7)             , KC_TRANSPARENT
+    KC_ESCAPE          , TD(DANCE_NUMROW_1), TD(DANCE_NUMROW_2), TD(DANCE_NUMROW_3)    , TD(DANCE_NUMROW_4), TD(DANCE_NUMROW_5)       , TG(LAYER_KEYBOARD)        ,                    TT(LAYER_QWERTY)         , TD(DANCE_NUMROW_6)            , TD(DANCE_NUMROW_7), TD(DANCE_NUMROW_8)    , TD(DANCE_NUMROW_9), TD(DANCE_NUMROW_0)  , KC_ENTER      ,
+    KC_TRANSPARENT     , C_S_T(KC_Q)       , KC_W              , LT(LAYER_PARENS, KC_F), KC_P              , KC_B                     , TG(LAYER_NO_DUAL_FUNCTION),                    TG(LAYER_NUMBERS_SYMBOLS), KC_J                          , KC_L              , LT(LAYER_PARENS, KC_U), KC_Y              , C_S_T(KC_SCOLON)    , KC_BSLASH     ,
+    TD(DANCE_XCV)      , LGUI_T(KC_A)      , LALT_T(KC_R)      , LCTL_T(KC_S)          , LSFT_T(KC_T)      , KC_G                     , LCTL(LGUI(KC_LEFT))       ,                    LCTL(LGUI(KC_RIGHT))     , KC_M                          , RSFT_T(KC_N)      , RCTL_T(KC_E)          , RALT_T(KC_I)      , RGUI_T(KC_O)        , KC_QUOTE      ,
+    LSFT_T(KC_CAPSLOCK), KC_Z              , KC_X              , KC_C                  , KC_D              , KC_V                     , KC_SPACE                  ,                    TG(LAYER_GAMING)         , KC_K                          , KC_H              , KC_COMMA              , KC_DOT            , KC_SLASH            , KC_GRAVE      ,
+    LCTL(KC_S)         , LCTL(KC_A)        , LCTL(KC_Z)        , MO(LAYER_FUNCTION)    , KC_ENTER          , MO(LAYER_NUMBERS_SYMBOLS), KC_TAB                    ,                    KC_DEL                   , LT(LAYER_NAVIGATION, KC_SPACE), KC_BSPACE         , MO(LAYER_FUNCTION)    , MO(LAYER_MEDIA)   , TT(LAYER_NAVIGATION), KC_TRANSPARENT
   ),
   [LAYER_NO_DUAL_FUNCTION] = LAYOUT( // Colemak-DH, no dual-function keys
     KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,                    KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,
@@ -146,11 +144,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     LCTL(LSFT(KC_ESCAPE)), KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT  , KC_TRANSPARENT , KC_TRANSPARENT,                    KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT
   ),
   [LAYER_GAMING] = LAYOUT( // Gaming
-    KC_ESCAPE, KC_1 , KC_2 , KC_3 , KC_4   , KC_5    , KC_6     ,                    KC_F1         , KC_F2   , KC_F3    , KC_NO   , KC_NO , KC_NO     , KC_ENTER  ,
-    KC_TAB   , KC_Q , KC_W , KC_E , KC_R   , KC_T    , KC_NO    ,                    KC_NO         , KC_Y    , KC_U     , KC_I    , KC_O  , KC_P      , KC_BSLASH ,
-    KC_NO    , KC_A , KC_S , KC_D , KC_F   , KC_G    , KC_NO    ,                    KC_NO         , KC_H    , KC_J     , KC_K    , KC_L  , KC_SCOLON , KC_QUOTE  ,
-    KC_LSHIFT, KC_Z , KC_X , KC_C , KC_V   , KC_B    , KC_GRAVE ,                    KC_TRANSPARENT, KC_N    , KC_M     , KC_COMMA, KC_DOT, KC_SLASH  , ST_MACRO_7,
-    KC_LCTRL , KC_NO, KC_NO, KC_NO, KC_LALT, KC_SPACE, KC_LSHIFT,                    KC_DELETE     , KC_SPACE, KC_BSPACE, KC_NO   , MO(10), ST_MACRO_8, ST_MACRO_9
+    KC_ESCAPE, KC_1 , KC_2 , KC_3 , KC_4   , KC_5    , KC_6     ,                    KC_F1         , KC_F2   , KC_F3    , KC_NO   , KC_NO          , KC_NO     , KC_ENTER  ,
+    KC_TAB   , KC_Q , KC_W , KC_E , KC_R   , KC_T    , KC_NO    ,                    KC_NO         , KC_Y    , KC_U     , KC_I    , KC_O           , KC_P      , KC_BSLASH ,
+    KC_NO    , KC_A , KC_S , KC_D , KC_F   , KC_G    , KC_NO    ,                    KC_NO         , KC_H    , KC_J     , KC_K    , KC_L           , KC_SCOLON , KC_QUOTE  ,
+    KC_LSHIFT, KC_Z , KC_X , KC_C , KC_V   , KC_B    , KC_GRAVE ,                    KC_TRANSPARENT, KC_N    , KC_M     , KC_COMMA, KC_DOT         , KC_SLASH  , ST_MACRO_7,
+    KC_LCTRL , KC_NO, KC_NO, KC_NO, KC_LALT, KC_SPACE, KC_LSHIFT,                    KC_DELETE     , KC_SPACE, KC_BSPACE, KC_NO   , MO(LAYER_MEDIA), ST_MACRO_8, ST_MACRO_9
   ),
   [LAYER_MEDIA] = LAYOUT( // Media
     KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,                    KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT     , KC_TRANSPARENT     , KC_TRANSPARENT     , KC_TRANSPARENT, KC_TRANSPARENT,

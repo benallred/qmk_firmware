@@ -265,6 +265,52 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   return true;
 }
 
+layer_state_t layer_state_set_user(layer_state_t state) {
+    switch (get_highest_layer(state)) {
+        case LAYER_NO_DUAL_FUNCTION:
+            rgblight_mode(1);
+            rgblight_sethsv(86, 255, 255);
+            break;
+        case LAYER_QWERTY:
+            rgblight_mode(1);
+            rgblight_sethsv(172, 255, 255);
+            break;
+        case LAYER_PARENS:
+            rgblight_mode(1);
+            rgblight_sethsv(162, 107, 193);
+            break;
+        case LAYER_NUMBERS_SYMBOLS:
+            rgblight_mode(1);
+            rgblight_sethsv(129, 255, 192);
+            break;
+        case LAYER_NAVIGATION:
+            rgblight_mode(1);
+            rgblight_sethsv(32, 255, 255);
+            break;
+        case LAYER_FUNCTION:
+            rgblight_mode(1);
+            rgblight_sethsv(235, 255, 224);
+            break;
+        case LAYER_GAMING:
+            rgblight_mode(1);
+            rgblight_sethsv(0, 0, 255);
+            break;
+        case LAYER_MEDIA:
+            rgblight_mode(1);
+            rgblight_sethsv(60, 255, 255);
+            break;
+        case LAYER_KEYBOARD:
+            rgblight_mode(1);
+            rgblight_sethsv(0, 255, 255);
+            break;
+        default:
+            rgblight_mode(RGBLIGHT_MODE_BREATHING);
+            rgblight_sethsv(129, 255, 192);
+            break;
+    }
+  return state;
+}
+
 typedef struct {
     bool is_press_action;
     uint8_t step;

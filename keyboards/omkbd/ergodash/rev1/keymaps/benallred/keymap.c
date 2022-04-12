@@ -1,5 +1,4 @@
 #include QMK_KEYBOARD_H
-#include <time.h>
 
 enum layers {
   LAYER_BASE,
@@ -176,18 +175,14 @@ void persistent_default_layer_set(uint16_t default_layer) {
 }
 
 unsigned char base_layer_hue = 129;
-unsigned char base_layer_saturation = 255;
-unsigned char base_layer_value = 192;
-
-void keyboard_post_init_user(void) {
-    srand(time(NULL));
-}
+#define base_layer_saturation 255
+#define base_layer_value 192
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
-  base_layer_hue += base_layer_hue == 0 ? 1 : base_layer_hue == 255 ? -1 : rand() % 2 ? 1 : -1;
-  base_layer_saturation += base_layer_saturation == 0 ? 1 : base_layer_saturation == 255 ? -1 : rand() % 2 ? 1 : -1;
-  base_layer_value += base_layer_value == 0 ? 1 : base_layer_value == 255 ? -1 : rand() % 2 ? 1 : -1;
-  rgblight_sethsv(base_layer_hue, base_layer_saturation, base_layer_value);
+  if (IS_LAYER_ON(LAYER_BASE)) {
+    base_layer_hue = (base_layer_hue + 1) % 256;
+    rgblight_sethsv_noeeprom(base_layer_hue, base_layer_saturation, base_layer_value);
+  }
 
   switch (keycode) {
     case ST_MACRO_2:
@@ -310,7 +305,7 @@ layer_state_t layer_state_set_user(layer_state_t state) {
             rgblight_sethsv(0, 255, 255);
             break;
         default:
-            rgblight_mode(1);
+            rgblight_mode(RGBLIGHT_MODE_BREATHING + 1);
             rgblight_sethsv(base_layer_hue, base_layer_saturation, base_layer_value);
             break;
     }

@@ -176,8 +176,8 @@ void persistent_default_layer_set(uint16_t default_layer) {
 }
 
 unsigned char base_layer_hue = 129;
-#define base_layer_saturation 255
-#define base_layer_value 192
+#define BASE_LAYER_SATURATION 255
+#define MAX_LED_VALUE 64
 
 void keyboard_post_init_user(void) {
     srand(time(NULL));
@@ -186,7 +186,7 @@ void keyboard_post_init_user(void) {
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   if (record->event.pressed && IS_LAYER_ON(LAYER_BASE)) {
     base_layer_hue = rand() % 256;
-    rgblight_sethsv_noeeprom(base_layer_hue, base_layer_saturation, base_layer_value);
+    rgblight_sethsv_noeeprom(base_layer_hue, BASE_LAYER_SATURATION, MAX_LED_VALUE);
   }
 
   switch (keycode) {
@@ -275,43 +275,43 @@ layer_state_t layer_state_set_user(layer_state_t state) {
     switch (get_highest_layer(state)) {
         case LAYER_NO_DUAL_FUNCTION:
             rgblight_mode_noeeprom(1);
-            rgblight_sethsv_noeeprom(86, 255, 255);
+            rgblight_sethsv_noeeprom(86, 255, MAX_LED_VALUE);
             break;
         case LAYER_QWERTY:
             rgblight_mode_noeeprom(1);
-            rgblight_sethsv_noeeprom(172, 255, 255);
+            rgblight_sethsv_noeeprom(172, 255, MAX_LED_VALUE);
             break;
         case LAYER_PARENS:
             rgblight_mode_noeeprom(1);
-            rgblight_sethsv_noeeprom(162, 107, 193);
+            rgblight_sethsv_noeeprom(213, 255, MAX_LED_VALUE);
             break;
         case LAYER_NUMBERS_SYMBOLS:
             rgblight_mode_noeeprom(1);
-            rgblight_sethsv_noeeprom(129, 255, 192);
+            rgblight_sethsv_noeeprom(129, 255, MAX_LED_VALUE);
             break;
         case LAYER_NAVIGATION:
             rgblight_mode_noeeprom(1);
-            rgblight_sethsv_noeeprom(32, 255, 255);
+            rgblight_sethsv_noeeprom(32, 255, MAX_LED_VALUE);
             break;
         case LAYER_FUNCTION:
             rgblight_mode_noeeprom(1);
-            rgblight_sethsv_noeeprom(235, 255, 224);
+            rgblight_sethsv_noeeprom(235, 255, MAX_LED_VALUE);
             break;
         case LAYER_GAMING:
             rgblight_mode_noeeprom(1);
-            rgblight_sethsv_noeeprom(0, 0, 255);
+            rgblight_sethsv_noeeprom(0, 0, MAX_LED_VALUE);
             break;
         case LAYER_MEDIA:
             rgblight_mode_noeeprom(1);
-            rgblight_sethsv_noeeprom(60, 255, 255);
+            rgblight_sethsv_noeeprom(60, 255, MAX_LED_VALUE);
             break;
         case LAYER_KEYBOARD:
             rgblight_mode_noeeprom(1);
-            rgblight_sethsv_noeeprom(0, 255, 255);
+            rgblight_sethsv_noeeprom(0, 255, MAX_LED_VALUE);
             break;
         default:
             rgblight_mode_noeeprom(RGBLIGHT_MODE_BREATHING + 1);
-            rgblight_sethsv_noeeprom(base_layer_hue, base_layer_saturation, base_layer_value);
+            rgblight_sethsv_noeeprom(base_layer_hue, BASE_LAYER_SATURATION, MAX_LED_VALUE);
             break;
     }
   return state;

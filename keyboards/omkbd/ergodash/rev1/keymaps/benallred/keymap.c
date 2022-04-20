@@ -1,4 +1,5 @@
 #include QMK_KEYBOARD_H
+#include <time.h>
 
 enum layers {
   LAYER_BASE,
@@ -178,9 +179,13 @@ unsigned char base_layer_hue = 129;
 #define base_layer_saturation 255
 #define base_layer_value 192
 
+void keyboard_post_init_user(void) {
+    srand(time(NULL));
+}
+
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
-  if (IS_LAYER_ON(LAYER_BASE)) {
-    base_layer_hue = (base_layer_hue + 1) % 256;
+  if (record->event.pressed && IS_LAYER_ON(LAYER_BASE)) {
+    base_layer_hue = rand() % 256;
     rgblight_sethsv_noeeprom(base_layer_hue, base_layer_saturation, base_layer_value);
   }
 

@@ -25,7 +25,15 @@
     },
     "python.formatting.provider": "yapf",
     "[json]": {
-	    "editor.formatOnSave": false
+        "editor.formatOnSave": false
     },
     "cSpell.enabled": false,
+    "search.exclude": {
+        "users/": true,
+        "keyboards/": true,
+        "keyboards/omkbd/ergodash": false,
+        "keyboards/moonlander": false,
+    },
+    "editor.formatOnSave": false,
+    "editor.formatOnPaste": false
 }
